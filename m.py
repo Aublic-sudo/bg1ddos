@@ -251,6 +251,7 @@ def handle_message(message):
         bot.reply_to(message, "*Invalid option*", parse_mode='Markdown')
 
 if __name__ == "__main__":
+    keep_alive()
     asyncio_thread = Thread(target=start_asyncio_thread, daemon=True)
     asyncio_thread.start()
     logging.info("Starting Codespace activity keeper and Telegram bot...")
