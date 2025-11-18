@@ -1,5 +1,6 @@
 import os
 import telebot
+import threading
 import json
 import requests
 import logging
@@ -8,8 +9,23 @@ from pymongo import MongoClient
 from datetime import datetime, timedelta
 import certifi
 import asyncio
+from flask import Flask
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton
 from threading import Thread
+
+
+app = Flask("")
+
+@app.route("/")
+def home():
+    return "Bot is alive!"
+
+def run():
+    app.run(host="0.0.0.0", port=8080)
+
+def keep_alive():
+    t = threading.Thread(target=run)
+    t.start()
 
 loop = asyncio.get_event_loop()
 TOKEN = os.environ.get("TOKEN")
